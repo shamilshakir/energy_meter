@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>84510371238-ah7qogi09q0conjiovob8rtgmtt1lt88.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.84510371238-ah7qogi09q0conjiovob8rtgmtt1lt88</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCL4Z-K_dXcBXKsfX9oPT_-mAJjZ7-H5ic</string>
+	<key>GCM_SENDER_ID</key>
+	<string>84510371238</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.energyMeter</string>
+	<key>PROJECT_ID</key>
+	<string>energy-meter-hsss</string>
+	<key>STORAGE_BUCKET</key>
+	<string>energy-meter-hsss.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:84510371238:ios:9dcc49c07c8f4dc802b367</string>
+	<key>DATABASE_URL</key>
+	<string>https://energy-meter-hsss-default-rtdb.firebaseio.com</string>
+</dict>
+</plist>

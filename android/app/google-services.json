@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "84510371238",
+    "firebase_url": "https://energy-meter-hsss-default-rtdb.firebaseio.com",
+    "project_id": "energy-meter-hsss",
+    "storage_bucket": "energy-meter-hsss.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:84510371238:android:3c0901ee0209bddc02b367",
+        "android_client_info": {
+          "package_name": "com.example.energy_meter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "84510371238-n03b7phienup59vjv5njqdnf9e1fu3tu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDeNADcG2PjVDkS0kaTEYBNcdpEmVfD_yQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "84510371238-n03b7phienup59vjv5njqdnf9e1fu3tu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
