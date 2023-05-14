@@ -85,6 +85,13 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          databaseReference.child('resetTrigger').set(true);
+        },
+        backgroundColor: Colors.teal,
+        child: const Icon(Icons.refresh),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
