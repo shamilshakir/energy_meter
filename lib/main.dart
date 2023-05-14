@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'EnergyApp',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
       ),
       home: const MyHomePage(title: 'Energy Meter'),
     );
@@ -37,13 +37,53 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  FirebaseDatabase database = FirebaseDatabase.instance;
+  final databaseReference = FirebaseDatabase.instance.ref();
+  String liveData = '';
+  String voltage = '';
+  String power = '';
+
+  @override
+  void initState() {
+    super.initState();
+    // Start listening to changes in the database
+    databaseReference.child('Energy').onValue.listen((event) {
+      setState(() {
+        liveData = event.snapshot.value.toString();
+      });
+    });
+    databaseReference.child('Voltage').onValue.listen((event) {
+      setState(() {
+        voltage = event.snapshot.value.toString();
+      });
+    });
+    databaseReference.child('Power').onValue.listen((event) {
+      setState(() {
+        power = event.snapshot.value.toString();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Add',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'Settings',
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -52,7 +92,7 @@ class _MyHomePageState extends State<MyHomePage> {
               height: 8.0,
             ),
             Card(
-              color: Colors.lightBlue,
+              color: Colors.teal,
               margin: const EdgeInsets.all(10.0),
               elevation: 5,
               child: SizedBox(
@@ -61,6 +101,14 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const SizedBox(height: 10),
+                    const Text(
+                      "Energy Usage",
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: CircularPercentIndicator(
@@ -68,9 +116,10 @@ class _MyHomePageState extends State<MyHomePage> {
                         lineWidth: 15.0,
                         animation: true,
                         percent: .3,
-                        center: const Text(
-                          '1 kWh',
-                          style: TextStyle(color: Colors.white, fontSize: 28),
+                        center: Text(
+                          '$liveData kWh',
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 28),
                         ),
                         progressColor: Colors.black,
                         backgroundColor: Colors.white,
@@ -91,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Card(
-              color: Colors.lightBlue,
+              color: Colors.teal,
               margin: const EdgeInsets.all(10.0),
               elevation: 5,
               child: SizedBox(
@@ -102,11 +151,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     const Padding(
                       padding: EdgeInsets.all(8.0),
                       child: Text(
-                        "Energy Usage",
+                        "Live Voltage & Power",
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                        ),
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
                     const SizedBox(height: 16),
@@ -116,18 +165,18 @@ class _MyHomePageState extends State<MyHomePage> {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Column(
-                            children: const [
-                              Text(
-                                "Today",
+                            children: [
+                              const Text(
+                                "Power",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                 ),
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Text(
-                                "2 kWh",
-                                style: TextStyle(
+                                "$power W",
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                 ),
@@ -135,18 +184,18 @@ class _MyHomePageState extends State<MyHomePage> {
                             ],
                           ),
                           Column(
-                            children: const [
-                              Text(
-                                "This month",
+                            children: [
+                              const Text(
+                                "Voltage",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                 ),
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Text(
-                                "60 kWh",
-                                style: TextStyle(
+                                "$voltage V",
+                                style: const TextStyle(
                                   color: Colors.white,
                                   fontSize: 20,
                                 ),
@@ -165,5 +214,14 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    // Stop listening to changes in the database
+    databaseReference.child('Energy').onValue.listen(null);
+    databaseReference.child('Voltage').onValue.listen(null);
+    databaseReference.child('Power').onValue.listen(null);
+    super.dispose();
   }
 }
